@@ -1,6 +1,5 @@
 const fs = require('fs');
 
-
 /**
  * Серверы из списка который скидывал Женя Капешко (мануально удалены серверы которых нет Entwicklungumgebung
  * и в Hambach
@@ -34,30 +33,23 @@ let sces = fs
 /**
  * servers - JSON выведенный из Entwicklungumgebung Эрнста. Таблица plus-server.
  * */
-let servers = require('./plus_server');
+let servers = require('./plus_server'); // [{}, {}, {}, ...]
 
 let sqlStrings = servers
     .map(server => {
         let serverNameWithoutVersion = server['server'].substring(0, 6);
 
-        for (let i = 0; i < neededServersWithoutVersion.length; i++) {
-
-            (function (i_local) {
-                return (function () {
-                    //console.log(i_local, 'elem: ', neededServersWithoutVersion[i_local], 'serverNameWithoutVersion: ', serverNameWithoutVersion);
-                })()
-            })(i);
-
-        }
-
         neededServersWithoutVersion.forEach(elem => {
-
+            // console.log('elem: ', elem);
+            // console.log('serverNameWithoutVersion', serverNameWithoutVersion);
             if (elem === serverNameWithoutVersion) {
-                console.log(elem === serverNameWithoutVersion);
-                console.log(server);
+                // console.log(elem === serverNameWithoutVersion);
+                // console.log(server);
                 return server;
             }
         });
+
+        console.log(findCustom(neededServersWithoutVersion, serverNameWithoutVersion)); // почему-то из массива neededServersWithoutVersion только последнюю запись берет??
 
         // return neededServersWithoutVersion.includes(server['server'].substring(0, 6));
         /*if (
@@ -70,3 +62,8 @@ let sqlStrings = servers
     }); // [{}, {}, {}]
 
 // console.log(sqlStrings);
+
+
+function findCustom(arr, el) {
+    return arr.filter(element => element === el);
+}
